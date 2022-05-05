@@ -26,10 +26,10 @@ Cobalt Duilib contains a complete set of development components for desktop soft
 Clone the repo into your disk.
 
 ```bash
-git clone https://github.com/netease-im/NIM_Duilib_Framework
+git clone https://github.com/3rdGen-Media/Cobalt
 ```
 
-Enter the `NIM_Duilib_Framework/examples` directory，Open `examples.sln` with Visual Studio 2013 Update 5 or higher ，press `F7` to compile all projects.
+Enter the `Cobalt/examples` directory，Open `examples.sln` with Visual Studio 2019 or higher ，press `F7` to compile all projects.
 
 ## Documentation
 
