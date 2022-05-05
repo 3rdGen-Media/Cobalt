@@ -1,6 +1,6 @@
 # Cobalt Native UI Framework
 
-Cobalt [a Duilib Fork] is a native C++ UI Framework containing a complete set of development components for desktop software. It is not so much an interface library as it is a development framework. Expanded some new capabilities from the original Duilib, and integrated the Google base basic class library (thread, memory, closure, etc.). You can directly use this framework to develop any desktop application you want.
+Cobalt [an extension of the Netease-IM Duilib Fork] is a native C++ UI Framework containing a complete set of components for developing native Win32 UI that expands upon the original NIM Duilib fork architecture on top of the original Duilib fork.
 
 ![GitHub](https://img.shields.io/badge/license-MIT-green.svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/u29yl0j7pasopm3h?svg=true)](https://ci.appveyor.com/project/nmgwddj/nim-duilib-framework)
