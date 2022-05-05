@@ -1,6 +1,6 @@
-# NIM Duilib
+# Cobalt (Duilib)
 
-NIM Duilib is a UI development framework for Windows, extend some new features based on the original [Duilib](https://github.com/duilib/duilib). Integrated Google base library with threads/memory/closures. You can use this framework to develop any desktop application you want.
+Cobalt Duilib contains a complete set of development components for desktop software. It is not so much an interface library as it is a development framework. Expanded some new capabilities from the original Duilib, and integrated the Google base basic class library (thread, memory, closure, etc.). You can directly use this framework to develop any desktop application you want.
 
 ![GitHub](https://img.shields.io/badge/license-MIT-green.svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/u29yl0j7pasopm3h?svg=true)](https://ci.appveyor.com/project/nmgwddj/nim-duilib-framework)
