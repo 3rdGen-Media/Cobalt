@@ -5,7 +5,7 @@ Cobalt Duilib contains a complete set of development components for desktop soft
 ![GitHub](https://img.shields.io/badge/license-MIT-green.svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/u29yl0j7pasopm3h?svg=true)](https://ci.appveyor.com/project/nmgwddj/nim-duilib-framework)
 
-[中文介绍](README.md)
+[Introduction in Chinese](README_ch-Mandarin.md)
 
 ## Features
 
