@@ -33,7 +33,7 @@ public:
 	 * @brief 判断是否接受 TAB 按键消息
 	 * @param[in] bWantTab 为 true 则接受该消息，false 为不接受
 	 * @return 无
-	 */
+	 */																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										
     void SetWantTab(bool bWantTab = true);
 
 	/**

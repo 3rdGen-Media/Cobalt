@@ -225,6 +225,8 @@ void FrameworkThread::FreeTlsData()
 	//DCHECK(tls != NULL);
 	if (tls == NULL)
 		return;
+
+	delete lazy_tls_data.Pointer();		//Modified by Joe Moulton to cleanup duilib memory leaks
 	lazy_tls_data.Pointer()->Set(NULL);
 	delete tls;
 }

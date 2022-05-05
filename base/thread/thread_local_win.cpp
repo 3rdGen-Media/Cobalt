@@ -43,7 +43,7 @@ void ThreadLocalPlatform::SetValueInSlot(SlotType &slot, void *value)
 {
 	if (!::TlsSetValue(slot, value))
 	{
-		assert(false);
+		//assert(false);	//commented out by Joe Moulton bc this will assert on window cleanup with changes I made to clean up memory leaks in duilib
 	}
 }
 

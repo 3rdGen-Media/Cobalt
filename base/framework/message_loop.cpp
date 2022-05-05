@@ -59,7 +59,10 @@ MessageLoop::~MessageLoop()
 	message_loop_proxy_->WillDestroyCurrentMessageLoop();
 	message_loop_proxy_ = nullptr;
 
+	
+	delete g_lazy_ptr.Pointer();		//modficiation by Joe Moulton to clean up duilib memory leaks
 	g_lazy_ptr.Pointer()->Set(NULL);
+
 }
 
 MessageLoop* MessageLoop::current()

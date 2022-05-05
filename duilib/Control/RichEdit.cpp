@@ -305,7 +305,9 @@ BOOL CTxtWinHost::Init(RichEdit *re, const CREATESTRUCT *pcs)
     IUnknown *pUnk = nullptr;
 	HMODULE hmod = NULL;
     HRESULT hr;
-	std::wstring edit_dll(L"msftedit.dll");
+	//std::wstring edit_dll(L"msftedit.dll");
+	std::wstring edit_dll(L"Riched20.dll");
+
     m_re = re;
     // Initialize Reference count
     cRefs = 1;
@@ -353,7 +355,7 @@ BOOL CTxtWinHost::Init(RichEdit *re, const CREATESTRUCT *pcs)
 
 	//解决32位系统下跨窗口间拖拽文字在win7及win7以下系统上会出现重复的问题（64位暂不修复） lty 20170714
 #if defined(_M_X64) || defined(__x86_64__)
-	edit_dll = L"msftedit.dll";
+	//edit_dll = L"msftedit.dll";
 #else
 	edit_dll = nbase::win32::GetCurrentModuleDirectory() + L"msftedit50.dll";
 	if (!(::GetFileAttributesW(edit_dll.c_str()) != INVALID_FILE_ATTRIBUTES))
@@ -2132,6 +2134,7 @@ void RichEdit::DoInit()
 	cs.lpszName = m_sText.c_str();
 	CreateHost(this, &cs, &m_pTwh);
 	if (m_pTwh) {
+		//SetPassword(true);
 		m_pTwh->SetTransparent(TRUE);
 		LRESULT lResult;
 		m_pTwh->GetTextServices()->TxSendMessage(EM_SETLANGOPTIONS, 0, 0, &lResult);

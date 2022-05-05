@@ -1415,7 +1415,7 @@ void Control::PaintStatusImage(IRenderContext* pRender)
 
 void Control::PaintText(IRenderContext* pRender)
 {
-    return;
+
 }
 
 void Control::PaintBorder(IRenderContext* pRender)

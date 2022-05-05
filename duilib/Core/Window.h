@@ -837,6 +837,8 @@ public:
 	 */
 	bool SetRenderTransparent(bool bCanvasTransparent);
 
+	void SetChildWindow(Window* childWindow) { m_childWindow = childWindow; }
+
 	/**
 	 * @brief 初始化布局
 	 * @return 无
@@ -876,6 +878,7 @@ private:
 	 */
 	void SetRenderOffsetY(int renderOffsetY);
 
+
 protected:
 	HWND m_hWnd;
 	WNDPROC m_OldWndProc;
@@ -883,6 +886,8 @@ protected:
 
 	Box* m_pRoot;
 	EventMap OnEvent;
+
+	Window* m_childWindow;
 
 protected:
 	CSize m_szMinWindow;

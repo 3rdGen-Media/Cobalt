@@ -108,7 +108,8 @@ HWND Window::GetHWND() const
 
 bool Window::RegisterWindowClass()
 {
-	WNDCLASS wc = { 0 };
+	WNDCLASSEXW  wc = { 0 };
+	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = GetClassStyle();
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
@@ -116,11 +117,16 @@ bool Window::RegisterWindowClass()
 	wc.lpfnWndProc = Window::__WndProc;
 	wc.hInstance = ::GetModuleHandle(NULL);
 	wc.hCursor = ::LoadCursor(NULL, IDC_ARROW);
-	wc.hbrBackground = NULL;
+	COLORREF color = 0x00000000;
+	
+	//SolidBrush alphaBrush(Color(0, 0, 0, 0));
+	HBRUSH brush = CreateSolidBrush(color);
+	wc.hbrBackground = brush;
 	wc.lpszMenuName = NULL;
 	std::wstring className = GetWindowClassName();
 	wc.lpszClassName = className.c_str();
-	ATOM ret = ::RegisterClass(&wc);
+
+	ATOM ret = ::RegisterClassEx(&wc);
 	ASSERT(ret != NULL || ::GetLastError() == ERROR_CLASS_ALREADY_EXISTS);
 	return ret != NULL || ::GetLastError() == ERROR_CLASS_ALREADY_EXISTS;
 }
@@ -161,7 +167,7 @@ std::wstring Window::GetSuperClassName() const
 
 UINT Window::GetClassStyle() const
 {
-	return 0;
+	return CS_HREDRAW | CS_VREDRAW;
 }
 
 HWND Window::Subclass(HWND hWnd)
@@ -196,6 +202,7 @@ HWND Window::Create(HWND hwndParent, LPCTSTR pstrName, DWORD dwStyle, DWORD dwEx
 		dwExStyle |= WS_EX_LAYERED;
 	}
 
+	
 	m_hWnd = ::CreateWindowEx(dwExStyle, className.c_str(), pstrName, dwStyle, 
 		rc.left, rc.top, rc.GetWidth(), rc.GetHeight(), hwndParent, NULL, ::GetModuleHandle(NULL), this);
 	LONG nWindowLong = GetWindowLong( m_hWnd, GWL_STYLE );
@@ -1727,6 +1734,9 @@ void Window::Invalidate(const UiRect& rcItem)
 
 void Window::Paint()
 {
+	//if (m_childWindow)
+	//	m_childWindow->Paint();
+
 	if (::IsIconic(m_hWnd) || !m_pRoot) {
 		PAINTSTRUCT ps = { 0 };
 		::BeginPaint(m_hWnd, &ps);
@@ -1862,7 +1872,7 @@ void Window::Paint()
 		CSize szWindow(rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
 		CPoint ptSrc;
 		BLENDFUNCTION bf = { AC_SRC_OVER, 0, m_nAlpha, AC_SRC_ALPHA };
-		::UpdateLayeredWindow(m_hWnd, NULL, &pt, &szWindow, m_renderContext->GetDC(), &ptSrc, 0, &bf, ULW_ALPHA);
+		::UpdateLayeredWindow(m_hWnd, NULL, NULL, &szWindow, m_renderContext->GetDC(), &ptSrc, 0, &bf, ULW_ALPHA);
 	}
 	else {
 		::BitBlt(ps.hdc, rcPaint.left, rcPaint.top, rcPaint.GetWidth(),
@@ -1870,6 +1880,8 @@ void Window::Paint()
 	}
 
 	::EndPaint(m_hWnd, &ps);
+
+
 }
 
 void Window::SetAlpha(int nAlpha)
