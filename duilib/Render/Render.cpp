@@ -1,7 +1,7 @@
 #include "StdAfx.h"
+#include "gdiplusenums.h"
 
 namespace ui {
-
 static inline void DrawFunction(HDC hDC, bool bTransparent, UiRect rcDest, HDC hdcSrc, UiRect rcSrc, bool bAlphaChannel, int uFade)
 {
 	if (bTransparent || bAlphaChannel || uFade < 255
@@ -558,7 +558,7 @@ void RenderContext_GdiPlus::DrawText(const UiRect& rc, const std::wstring& strTe
 	else {
 		stringFormat.SetLineAlignment(Gdiplus::StringAlignmentNear);
 	}
-
+	graphics.SetTextRenderingHint(Gdiplus::TextRenderingHint::TextRenderingHintAntiAlias);
 	graphics.DrawString(strText.c_str(), (int)strText.length(), &font, rcPaint, &stringFormat, &tBrush);
 }
 
