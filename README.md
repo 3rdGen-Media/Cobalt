@@ -2,7 +2,7 @@
 
 Cobalt is a native C++ Object-Oriented UI and UI Thread Management Framework originating from [NIM Duilib](https://github.com/netease-im/NIM_Duilib_Framework) that catalyzes rapid development and choreography of native Win32 UI to complement interactive applications emphasizing lowest-latency real-time rendering, audio processing and network transport.  
 
-*Cobalt is the modular User Interface Layer for Win32 Desktop [and tentatively for non-Darwin] client platforms that runs in parallel to 3rdGen's accelerated graphics pipeline, CoreRender. Together, Cobalt's C++ Window API and CoreRender's modular C APIs  provide the "rails" for implementing UI and full-scene 3D rendering respectively within 3rdGen's proprietary render engine and cross-platform application framework, Cobalt Rhenium.* 
+*Cobalt is the modular User Interface Layer for Win32 Desktop [and tentatively for non-Darwin] client platforms that operates in parallel to 3rdGen's Accelerated Graphics Layer, CoreRender. Together, Cobalt's C++ Window API and CoreRender's modular C APIs provide the "rails" for implementing UI and full-scene 3D render pipelines respectively within 3rdGen's proprietary simulation engine and cross-platform application framework, Cobalt Rhenium.* 
 
 ## Features
 
