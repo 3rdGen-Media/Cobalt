@@ -1,4 +1,4 @@
-# Cobalt
+# Cobalt Native UI Framework
 
 Cobalt [a Duilib Fork] is a native C++ UI Framework containing a complete set of development components for desktop software. It is not so much an interface library as it is a development framework. Expanded some new capabilities from the original Duilib, and integrated the Google base basic class library (thread, memory, closure, etc.). You can directly use this framework to develop any desktop application you want.
 
