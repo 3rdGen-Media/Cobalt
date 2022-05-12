@@ -16,7 +16,7 @@ Cobalt is a native C++ Object-Oriented UI and UI Thread Management Framework ori
 
 ## Preview
 
-![preview](docs/UserSpace.gif)
+![preview](UserSpace.gif)
 
 ## Start
 
