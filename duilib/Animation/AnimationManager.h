@@ -17,7 +17,7 @@ public:
 	AnimationPlayer* GetAnimationPlayer(AnimationType animationType) const;
 
 	AnimationPlayer* SetFadeHot(bool bFadeHot);
-	AnimationPlayer* SetFadeAlpha(bool bFadeVisible);
+	AnimationPlayer* SetFadeAlpha(int bFadeDurationMilliseconds);
 	AnimationPlayer* SetFadeWidth(bool bFadeWidth);
 	AnimationPlayer* SetFadeHeight(bool bFadeHeight);
 	AnimationPlayer* SetFadeInOutX(bool bFade, bool bIsFromRight);

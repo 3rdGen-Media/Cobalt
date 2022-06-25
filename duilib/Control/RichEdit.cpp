@@ -305,9 +305,12 @@ BOOL CTxtWinHost::Init(RichEdit *re, const CREATESTRUCT *pcs)
     IUnknown *pUnk = nullptr;
 	HMODULE hmod = NULL;
     HRESULT hr;
-	//std::wstring edit_dll(L"msftedit.dll");
-	std::wstring edit_dll(L"Riched20.dll");
 
+
+	//Fork Change: Richedit loaded from msftedit.dll breaks windowless control using ES_PASSWORD with manifests containing compability entries targeting Windows 8 and beyond!
+	//			   I have confirmed that the version loaded from Riched20.dll addresses this issue.
+	//std::wstring edit_dll(L"msftedit.dll");
+	std::wstring edit_dll(L"Riched20.dll");  
     m_re = re;
     // Initialize Reference count
     cRefs = 1;
@@ -2134,7 +2137,9 @@ void RichEdit::DoInit()
 	cs.lpszName = m_sText.c_str();
 	CreateHost(this, &cs, &m_pTwh);
 	if (m_pTwh) {
-		//SetPassword(true);
+		//char byte = 149;
+		if( IsPassword() )
+			m_pTwh->SetPasswordChar(L'\u2022');
 		m_pTwh->SetTransparent(TRUE);
 		LRESULT lResult;
 		m_pTwh->GetTextServices()->TxSendMessage(EM_SETLANGOPTIONS, 0, 0, &lResult);

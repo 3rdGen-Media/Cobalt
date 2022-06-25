@@ -1,9 +1,9 @@
 // This file trys to implement a cross flatform message loop proxy,
 // the mechanism of which is from the Google Chrome project.
 
+#pragma once
 #ifndef BASE_MESSAGE_LOOP_PROXY_H_
 #define BASE_MESSAGE_LOOP_PROXY_H_
-#pragma once
 
 #include "base/base_export.h"
 #include "base/framework/message_loop.h"
@@ -98,12 +98,7 @@ private:
 			std_reply_ = reply;
 		}
 
-		void Run()
-		{
-			auto ret = std_task_();
-			origin_loop_->PostTask(
-				nbase::Bind(&PostTaskAndReplyRelay::RunReplyAndSelfDestructWithParam<decltype(ret)>, this, ret));
-		}
+		void Run();
 
 		~PostTaskAndReplyRelay() 
 		{
@@ -149,13 +144,6 @@ private:
 	};
 };
 
-template<>
-void MessageLoopProxy::PostTaskAndReplyRelay<void(), void()>::Run()
-{
-	std_task_();
-	origin_loop_->PostTask(
-		nbase::Bind(&PostTaskAndReplyRelay::RunReplyAndSelfDestruct, this));
-}
 
 }  // namespace nbase
 

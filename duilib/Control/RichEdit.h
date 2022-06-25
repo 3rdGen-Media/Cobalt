@@ -100,6 +100,7 @@ public:
 	 * @return 无
 	 */
 	void SetPassword(bool bPassword);
+	//void SetPasswordChar(char bPassword);
 
 	/**
 	 * @brief 获取超出矩形区域的文本显示方式

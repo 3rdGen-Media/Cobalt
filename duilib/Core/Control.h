@@ -242,6 +242,10 @@ public:
 	 * @return 无
 	 */
 	void SetCursorType(CursorType flag);
+	void SetCustomCursor(HCURSOR cursor);
+	void SetOverrideCursor(HCURSOR cursor);
+
+	void SetFadeAlpha(int bFadeDurationMilliseconds);
 
 	/**
 	 * @brief 获取控件在鼠标悬浮状态下的提示文本
@@ -909,6 +913,9 @@ protected:
 	UiRect m_rcPaint;
 	UiRect m_rcBorderSize;
 	CursorType m_cursorType;	//影响控件的鼠标形状
+	HCURSOR m_customCursor;
+	HCURSOR m_overrideCursor;
+	
 	ControlStateType m_uButtonState;
 	std::wstring m_sToolTipText;
 	std::wstring m_sToolTipTextId;

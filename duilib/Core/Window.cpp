@@ -106,6 +106,19 @@ HWND Window::GetHWND() const
     return m_hWnd; 
 }
 
+void Window::SetCustomCursor(HCURSOR cursor)
+{
+	m_cursor = cursor;
+	//POINT pt = { 0 };
+	//::GetCursorPos(&pt);
+	//::ScreenToClient(m_hWnd, &pt);
+	//m_ptLastMousePos = pt;
+	//Control* pControl = FindControl(pt);
+	//if (pControl == NULL) pControl->SetCursor(cursor);
+
+	//SetCursor(cursor);
+}
+
 bool Window::RegisterWindowClass()
 {
 	WNDCLASSEXW  wc = { 0 };
@@ -116,6 +129,7 @@ bool Window::RegisterWindowClass()
 	wc.hIcon = NULL;
 	wc.lpfnWndProc = Window::__WndProc;
 	wc.hInstance = ::GetModuleHandle(NULL);
+
 	wc.hCursor = ::LoadCursor(NULL, IDC_ARROW);
 	COLORREF color = 0x00000000;
 	
@@ -1403,7 +1417,15 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		::ScreenToClient(m_hWnd, &pt);
 		m_ptLastMousePos = pt;
 		Control* pControl = FindControl(pt);
-		if (pControl == NULL) break;
+		if (pControl == NULL) {
+		
+			if (m_cursor) SetCursor(m_cursor);
+			else
+				SetCursor(::LoadCursor(NULL, IDC_ARROW));
+			break;
+
+		}
+		pControl->SetOverrideCursor(m_cursor);
 		pControl->HandleMessageTemplate(kEventSetCursor, wParam, lParam, 0, pt);
 	}
 	handled = true;
@@ -1734,8 +1756,6 @@ void Window::Invalidate(const UiRect& rcItem)
 
 void Window::Paint()
 {
-	//if (m_childWindow)
-	//	m_childWindow->Paint();
 
 	if (::IsIconic(m_hWnd) || !m_pRoot) {
 		PAINTSTRUCT ps = { 0 };

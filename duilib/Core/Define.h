@@ -67,7 +67,8 @@ enum CursorType
 {
 	kCursorArrow,		// 箭头
 	kCursorHand,		// 手柄
-	kCursorHandIbeam	// 
+	kCursorHandIbeam,	// 
+	kCursorCustom		// 
 };
 
 //定义所有消息类型

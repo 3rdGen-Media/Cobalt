@@ -28,6 +28,8 @@ Control::Control() :
 	m_rcPaint(),
 	m_rcBorderSize(),
 	m_cursorType(kCursorArrow),
+	m_customCursor(0),
+	m_overrideCursor(0),
 	m_uButtonState(kControlStateNormal),
 	m_nBorderSize(0),
 	m_nTooltipWidth(300),
@@ -331,6 +333,17 @@ void Control::SetBorderRound(CSize cxyRound)
 CursorType Control::GetCursorType() const
 {
 	return m_cursorType;
+}
+
+void Control::SetOverrideCursor(HCURSOR cursor)
+{
+	m_overrideCursor = cursor;
+}
+
+void Control::SetCustomCursor(HCURSOR cursor)
+{
+	m_customCursor = cursor;
+	m_cursorType = kCursorCustom;// cursor ? kCursorCustom : kCursorArrow;
 }
 
 void Control::SetCursorType(CursorType flag)
@@ -781,7 +794,13 @@ void Control::HandleMessage(EventArgs& msg)
 		return;
 	}
 	else if( msg.Type == kEventSetCursor ) {
-		if (m_cursorType == kCursorHand) {
+
+		if (m_overrideCursor)
+		{
+			::SetCursor(m_overrideCursor);
+			return;
+		}
+		else if (m_cursorType == kCursorHand) {
 			if (IsEnabled()) {
 				::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_HAND)));
 			}
@@ -799,7 +818,10 @@ void Control::HandleMessage(EventArgs& msg)
 			return;
 		}
 		else {
-			ASSERT(FALSE);
+
+			::SetCursor(m_customCursor);
+			return;
+			//ASSERT(FALSE);
 		}
 	}
 	else if (msg.Type == kEventInternalSetFocus) {
@@ -1121,7 +1143,7 @@ void Control::SetAttribute(const std::wstring& strName, const std::wstring& strV
 	else if (strName == _T("forehotimage") ) SetForeStateImage(kControlStateHot, strValue);
 	else if (strName == _T("forepushedimage") ) SetForeStateImage(kControlStatePushed, strValue);
 	else if (strName == _T("foredisabledimage") ) SetForeStateImage(kControlStateDisabled, strValue);
-	else if (strName == _T("fadealpha")) m_animationManager.SetFadeAlpha(strValue == _T("true"));
+	else if (strName == _T("fadealpha")) m_animationManager.SetFadeAlpha(_ttoi(strValue.c_str()));
 	else if (strName == _T("fadehot")) m_animationManager.SetFadeHot(strValue == _T("true"));
 	else if (strName == _T("fadewidth")) m_animationManager.SetFadeWidth(strValue == _T("true"));
 	else if (strName == _T("fadeheight")) m_animationManager.SetFadeHeight(strValue == _T("true"));
@@ -1134,6 +1156,11 @@ void Control::SetAttribute(const std::wstring& strName, const std::wstring& strV
     {
         ASSERT(FALSE);
     }
+}
+
+void Control::SetFadeAlpha(int bFadeDurationMilliseconds)
+{
+	m_animationManager.SetFadeAlpha(bFadeDurationMilliseconds);
 }
 
 void Control::SetClass(const std::wstring& strClass)

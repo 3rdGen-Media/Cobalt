@@ -39,7 +39,7 @@ void MainThread::Init()
 	ui::GlobalManager::Startup(theme_dir + L"resources\\", ui::CreateControlCallback(), false);
 
 	// 一个仿微信的布局示例
-	LayoutsForm::ShowCustomWindow(L"basic_layout", L"layouts", L"wechat.xml");
+	LayoutsForm::ShowCustomWindow(L"basic_layout", L"layouts", L"login.xml");
 
 	// 一个仿登录窗口的布局示例
 	// LayoutsForm::ShowCustomWindow(L"login", L"layouts", L"login.xml");

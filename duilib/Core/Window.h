@@ -837,7 +837,7 @@ public:
 	 */
 	bool SetRenderTransparent(bool bCanvasTransparent);
 
-	void SetChildWindow(Window* childWindow) { m_childWindow = childWindow; }
+	void SetCustomCursor(HCURSOR cursor);
 
 	/**
 	 * @brief 初始化布局
@@ -886,8 +886,8 @@ protected:
 
 	Box* m_pRoot;
 	EventMap OnEvent;
-
-	Window* m_childWindow;
+	
+	HCURSOR m_cursor;
 
 protected:
 	CSize m_szMinWindow;

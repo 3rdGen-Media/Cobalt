@@ -45,16 +45,19 @@ AnimationPlayer* AnimationManager::SetFadeHot(bool bFadeHot)
 	return animationArgs;
 }
 
-AnimationPlayer* AnimationManager::SetFadeAlpha(bool bFadeVisible)
+
+AnimationPlayer* AnimationManager::SetFadeAlpha(int bFadeDurationMilliseconds)
 {
+	const bool bFadeVisible = bFadeDurationMilliseconds ? true : false;
+
 	AnimationPlayer* animationArgs = nullptr;
 	if (bFadeVisible) {
 		animationArgs = new AnimationPlayer();
 		animationArgs->SetStartValue(0);
 		animationArgs->SetEndValue(255);
 		animationArgs->SetSpeedUpRatio(0.3);
-		animationArgs->SetSpeedDownRatio(0.7);
-		animationArgs->SetTotalMillSeconds(250);
+		animationArgs->SetSpeedDownRatio(0.3);
+		animationArgs->SetTotalMillSeconds(bFadeDurationMilliseconds);
 		std::function<void(int)> playCallback = nbase::Bind(&Control::SetAlpha, m_pControl, std::placeholders::_1);
 		animationArgs->SetCallback(playCallback);
 		m_animationMap[kAnimationAlpha].reset(animationArgs);
